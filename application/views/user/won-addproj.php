@@ -208,7 +208,7 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		
 
 		<!-- <![endif]-->
 
@@ -235,7 +235,8 @@
 		<script src="<?php echo $base;?>js/flot/jquery.flot.min.js"></script>
 		<script src="<?php echo $base;?>js/flot/jquery.flot.pie.min.js"></script>
 		<script src="<?php echo $base;?>js/flot/jquery.flot.resize.min.js"></script>
-
+		<script src="<?php echo $base;?>js/chosen.jquery.min.js"></script>
+		
 		<!-- ace scripts -->
 
 		<script src="<?php echo $base;?>js/ace-elements.min.js"></script>

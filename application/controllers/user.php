@@ -11,15 +11,19 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		}
 		public function index()
 		{
-			$data['base']=$this->config->item('base_url');
+			//$data['base']=$this->config->item('base_url');
+			$data['base']=$this->config->base_url();
 			$data['conbase']=base_url()."index.php/user/";
 			$this->load->view('user/won-login',$data);
 		}
 		public function test1(){
 			//var_dump($data['base']);
-			$js=$this->config->item('base_url');
+			//$data['base']=$this->config->item('base_url');
+			$data['base']=base_url();
+			$js=$data['base'];
 			//$js1=$js.'js';
-			echo $this->config->item('base_url');
+			//echo base_url();
+			echo $this->config->base_url();
 			echo ($js.'js');
 		}
 		
@@ -78,6 +82,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 			$data['u_name']=$_SESSION['username'];			
 			$u_id=$_SESSION['u_id'];
 			$data['base'] = $this->config->item('base_url'); 
+		//	echo $data['base'];
+		//	echo $this->config->item('base_url'); 
 			$data['conbase']=base_url()."index.php/user/";	
 			//数据库中具体查询项目详情
 			$projsql="select * from project where p_id=".$p_id;
@@ -188,6 +194,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 				$signdata=$this->user->getalldata($sql);
 				$data['signdata']=$signdata;
 				if(empty($createdata)){
+
 					$this->show_project($p_id,$data,"projdetail-signup");	
 				}
 				else{

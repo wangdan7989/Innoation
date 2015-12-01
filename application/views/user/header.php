@@ -20,13 +20,14 @@
 		<link rel="stylesheet" href="<?php echo $base;?>css/chosen.css" />
 		<link rel="stylesheet" href="<?php echo $base;?>css/datepicker.css" />
 		<link rel="stylesheet" href="<?php echo $base;?>css/daterangepicker.css" />
-		<link rel="stylesheet" href="<?php echo $base;?>css/addproj.css"><!--afterall use><!-->
+		
 		<link rel="stylesheet" href="<?php echo $base;?>css/jquery-ui-1.10.3.custom.min.css" />
 		<link rel="stylesheet" href="<?php echo $base;?>css/bootstrap-timepicker.css" />
 
 		<!-- fonts -->
 
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
 
 		<!-- ace styles -->
 
@@ -41,8 +42,9 @@
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
-
+		<script src="<?php echo $base;?>js/jquery2.1.1jquery.min.js"></script>
 		<script src="<?php echo $base;?>js/ace-extra.min.js"></script>
+		
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
