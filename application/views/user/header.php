@@ -31,7 +31,7 @@
 		<!-- ace styles -->
 
 		<link rel="stylesheet" href="<?php echo $base;?>css/ace.min.css" />
-		<link rel="stylesheet" href="<?php echo $base;?>ss/ace-rtl.min.css" />
+		<link rel="stylesheet" href="<?php echo $base;?>css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="<?php echo $base;?>css/ace-skins.min.css" />
 
 		<!--[if lte IE 8]>
