@@ -18,9 +18,9 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		public function test1(){
 			//var_dump($data['base']);
 			$js=$this->config->item('base_url');
-			//$js1=$js.'/js';
+			//$js1=$js.'js';
 			echo $this->config->item('base_url');
-			echo ($js.'/js');
+			echo ($js.'js');
 		}
 		
 		//登录界面
