@@ -28,7 +28,7 @@
 							<div class="col-xs-12 col-sm-3 center">
 								<div>
 									<span class="profile-picture">
-										<img class="editable img-responsive"  src="<?php echo $base."/images/gallery/image-1.jpg";?>" />
+										<img class="editable img-responsive"  src="<?php echo $base."images/gallery/image-".$projdata[0]['p_id'].".jpg";?>" />
 									</span>
 
 									<div class="space-4"></div>

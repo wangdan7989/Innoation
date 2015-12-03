@@ -69,7 +69,7 @@
 
 											<div class="space-6"></div>
 
-											<form action="<?php echo $conbase."login";?>"   method="post">
+											<form action="<?php echo "login";?>"   method="post">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -271,25 +271,24 @@
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 <![endif]-->
 
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='<?php echo $base."/js/jquery-2.0.3.min.js";?>'>"+"<"+"/script>");
-		</script>
+			window.jQuery || document.write("<script src='<?php echo $base."js/jquery-2.0.3.min.js";?>'>"+"<"+"/script>");
+		</script>	
 
 		<!-- <![endif]-->
 
-		<!--[if IE]>
-<script type="text/javascript">
+		<!--[if IE<script type="text/javascript">
  window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='<?php echo $base."/js/jquery.mobile.custom.min.js";?>'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='<?php echo $base."js/jquery.mobile.custom.min.js";?>'>"+"<"+"/script>");
 		</script>
 
 		<!-- inline scripts related to this page -->

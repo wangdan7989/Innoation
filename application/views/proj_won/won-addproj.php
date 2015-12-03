@@ -48,7 +48,7 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 
-								<form class="form-horizontal" role="form" action="<?php echo $conbase."project_application";?>"  method="post">
+								<form class="form-horizontal" role="form" action="<?php echo site_url();?>project_application/project_post"  method="post">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 项目名称 </label>
 

@@ -56,12 +56,7 @@
 											<span class="badge badge-danger">4</span>
 										</a>
 									</li>
-									<li>
-										<a data-toggle="tab" href="#innovation">
-											创新项目
-											<span class="badge badge-danger">4</span>
-										</a>
-									</li>
+									
 									
 								</ul>
 
@@ -97,7 +92,7 @@
 											?>
 													<tr>
 														<td>
-															<a href="<?php echo base_url().'index.php/user/show_projectstate/'.$takepartdata[$i]['p_id'];?>"><?php echo $takepartdata[$i]['p_name'];?></a>
+															<a href="<?php echo site_url().'/Show_project/show_projectstate/'.$takepartdata[$i]['p_id'];?>"><?php echo $takepartdata[$i]['p_name'];?></a>
 														</td>
 														<td>
 															<a href="#"><?php echo $takepartdata[$i]['team_name'];?></a>
@@ -150,7 +145,7 @@
 											?>
 													<tr>
 														<td>
-															<a href="<?php echo base_url().'index.php/user/show_projectstate/'.$createdata[$i]['p_id'];?>"><?php echo $createdata[$i]['p_name']?></a>
+															<a href="<?php echo site_url().'/Show_project/show_projectstate/'.$createdata[$i]['p_id'];?>"><?php echo $createdata[$i]['p_name']?></a>
 														</td>
 														<td>
 															<a href="#"><?php echo $createdata[$i]['fund']?></a>
@@ -194,149 +189,37 @@
 												</thead>
 
 												<tbody>
+													<?php 
+											 if(count($createdata)!=0){
+												 for($i=0;$i<count($createdata);$i++){
+												
+											?>
 													<tr>
 														<td>
-															<a href="#">app.com</a>
+															<a href="<?php echo site_url().'/Show_project/show_projectstate/'.$createdata[$i]['p_id'];?>"><?php echo $createdata[$i]['p_name']?></a>
 														</td>
 														<td>
-															<a href="#">app.com</a>
+															<a href="#"><?php echo $createdata[$i]['fund']?></a>
 														</td>
-														<td>$45</td>
+														<td><?php echo $createdata[$i]['u_id']?></td>
 														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
+														<td><?php echo $createdata[$i]['state']?></td>
 
 														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
+															<span class="label label-sm label-warning"><?php echo $createdata[$i]['team_name']?></span>
 														</td>
 
 													</tr>
-													<tr>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-
-													</tr>
-													<tr>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-
-													</tr>
-													<tr>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-													</tr>	
+													<?php 
+													 }
+														}
+													?>	
 												</tbody>
 											</table>
 										</div>
 									</div>
 
-				                    <div id="innovation" class="tab-pane">
-										<div class="table-header">
-										创新项目 
-										</div>
-										<div class="table-responsive">
-											<table id="sample-table-2" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th>项目名称</th>
-														<th>团队名称</th>
-														<th>项目类型</th>
-														<th>项目经费</th>
-														<th>起止时间</th>
-													</tr>
-												</thead>
-
-												<tbody>
-													<tr>
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-
-													</tr>
-													<tr>
-														
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-
-													</tr>
-													<tr>
-														
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-
-													</tr>
-													<tr>
-														
-														<td>
-															<a href="#">app.com</a>
-														</td>
-														<td>$45</td>
-														<td class="hidden-480">3,330</td>
-														<td>Feb 12</td>
-
-														<td class="hidden-480">
-															<span class="label label-sm label-warning">Expiring</span>
-														</td>
-													</tr>	
-												</tbody>
-											</table>
-										</div>
-									</div>
+				                  
 
 								</div>
 							</div>

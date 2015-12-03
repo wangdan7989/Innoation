@@ -77,7 +77,7 @@
 												?>
 													<tr>
 														<td>
-															<a href="<?php echo base_url()."/index.php/user/show_projectstate/".$data[$i]['p_id'];?>"><?php echo $data[$i]['p_name'];?></a>
+															<a href="<?php echo site_url()."/Show_project/show_projectstate/".$data[$i]['p_id'];?>"><?php echo $data[$i]['p_name'];?></a>
 														</td>
 														<td><?php echo $data[$i]['type'];?></td>
 														<td class="hidden-480"><?php echo $data[$i]['max_member'];?></td>

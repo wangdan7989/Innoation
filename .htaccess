@@ -1,0 +1,6 @@
+RewriteEngine on 
+ 
+
+RewriteCond $1 !^(index\.php|images|js|css|avatars|robots\.txt)
+ 
+RewriteRule ^(.*)$ /Innoation/index.php/$1 [L]

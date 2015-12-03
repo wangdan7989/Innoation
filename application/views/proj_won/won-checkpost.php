@@ -90,10 +90,10 @@
 
 														<td>
 															<a href="<?php if(strcasecmp($_SESSION['identity'],"administrator")==0){
-																				echo base_url()."index.php/user/administrator_show_projectstate/".$pro_data[$i]['p_id'];
+																				echo site_url()."/Show_project/administrator_show_projectstate/".$pro_data[$i]['p_id'];
 																			}
 																			if(strcasecmp($_SESSION['identity'],"student")==0){
-																				echo base_url()."index.php/user/show_projectstate/".$pro_data[$i]['p_id'];
+																				echo site_url()."/Show_project/show_projectstate/".$pro_data[$i]['p_id'];
 																			}
 																?>"><?php echo $pro_data[$i]['p_name'];?></a>
 														</td>
@@ -199,10 +199,10 @@
 														<td>
 															<a href="<?php 
 															if(strcasecmp($_SESSION['identity'],"administrator")==0){
-																				echo base_url()."index.php/user/administrator_show_projectstate/".$post_data[$i]['p_id'];
+																				echo site_url()."/Show_project/administrator_show_projectstate/".$post_data[$i]['p_id'];
 																			}
 																			if(strcasecmp($_SESSION['identity'],"student")==0){
-																				echo base_url()."index.php/user/show_projectstate/".$post_data[$i]['p_id'];
+																				echo site_url()."/Show_project/show_projectstate/".$post_data[$i]['p_id'];
 																			}
 															?>"><?php echo $post_data[$i]['p_name'];?></a>
 														</td>

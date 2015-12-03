@@ -1,20 +1,12 @@
-<?php session_start();
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	class User extends CI_Controller{
+<?php //session_start();
+//if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	class User extends MY_controller{
 		
-		function __construct()
-		{
-			parent::__construct();
-			$this->load->helper('url');
-			//$this->load->library('pagination');
-			$this->load->model('User_model','user');
-		}
+		
 		public function index()
 		{
-			//$data['base']=$this->config->item('base_url');
 			$data['base']=$this->config->base_url();
-			$data['conbase']=base_url()."index.php/user/";
-			$this->load->view('user/won-login',$data);
+			$this->load->view('proj_won/won-login',$data);
 		}
 		public function test1(){
 			//var_dump($data['base']);
@@ -46,12 +38,12 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 				
 				if(strcasecmp($data['identity'],"administrator")==0){
 					//echo "进入管理员界面";
-					redirect('user/add_application/');
+					redirect('project_application/add_application/');
 				}
 				if(strcasecmp($data['identity'],"student")==0){
 							
 						//项目申报界面	
-						redirect('user/add_application/');
+						redirect('project_application/add_application/');
 							
 							//echo "进入学生界面";
 				}		
@@ -66,394 +58,16 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 			}
 			
 		}
-		//总的界面的分布显示
-		public function show($data,$view){		
-			$data['u_name']=$_SESSION['username'];
-			$data['base'] = $this->config->item('base_url'); 
-			$data['conbase']=base_url()."index.php/user/";
-			$this->load->view('user/header',$data);
-			$this->load->view('user/navbar',$data);
-			$this->load->view('user/siderbar',$data);
-			$this->load->view('user/'.$view,$data);
-			$this->load->view('user/footer',$data);		
-		}	
-		//项目内容页面的分布显示
-		public function show_project($p_id,$data,$view){
-			$data['u_name']=$_SESSION['username'];			
-			$u_id=$_SESSION['u_id'];
-			$data['base'] = $this->config->item('base_url'); 
-		//	echo $data['base'];
-		//	echo $this->config->item('base_url'); 
-			$data['conbase']=base_url()."index.php/user/";	
-			//数据库中具体查询项目详情
-			$projsql="select * from project where p_id=".$p_id;
-			$projdata=$this->user->getalldata($projsql);
-			$data['projdata']=$projdata;
-			//var_dump($projdata);
-			$this->load->view('user/header',$data);
-			$this->load->view('user/navbar',$data);
-			$this->load->view('user/siderbar',$data);
-			$this->load->view('user/detail-project',$data);
-			
-			$this->load->view('user/'.$view,$data);
-			
-			$this->load->view('user/footer',$data);	
-		}
-		//申请项目待审核
+	
 		
-		public function add_application(){
-			$data=array();
-			$this->show($data,'won-addproj');
-		}
-		//项目申报页面
-		public function project_application(){
-			
-			$username=$_SESSION['username'];		
-			$project_message['created_by']=$username;
-			$project_message['p_name']=$_POST['p_name'];
-			$project_message['type']=$_POST['type'];
-			$project_message['property']=$_POST['property'];
-			$project_message['fund']=$_POST['fund'];
-			$project_message['reward_method']=$_POST['reward_method'];
-			$project_message['project_deadline']=$_POST['project_deadline'];
-			
-			$project_message['contact_way']=$_POST['contact_way'];
-			$project_message['max_member']=$_POST['max_member'];
-			$project_message['have_member']=0;
-			//$project_message['picture']=$_POST[];
-			//$project_message['address']=$_POST[];
-			//$project_message['team_name']=$_POST[];
-			$project_message['description']=$_POST['description'];		
-			$project_message['state']='checking';
-			$project_message['rate']='checking';
-			//分割拼接post传过来的时间以便存数据库
-			$time=$_POST['time'];
-			list($start_time,$finish_time)=explode('-',$time,2);
-			list($month,$day,$year)=explode('/',$start_time,3);
-			list($fmonth,$fday,$fyear)=explode('/',$finish_time,3);
-			$project_message['start_time']=str_replace(" ","",$year."-".$month."-".$day);
-			$project_message['finish_time']=str_replace(" ","",$fyear."-".$fmonth."-".$fday);
-			$table='project';
-			$bool=$this->user->insert($table,$project_message);
-			//echo $this->db->last_query();
-			if($bool==1){
-				//echo $username;
-				echo "<script> alert('项目申请成功!');window.location.href='".base_url()."/index.php/user/add_application/".$username."';</script>";
-				//echo "<script> alert(\'项目申请成功！\');window.location.href='".base_url()."/index.php/user/login?username=".$username.",password=".$password."';</script>";  
-				//redirect('/user/login?username='.$_SESSION['username']',password='.$_SESSION['password']);
 				
-				
-			}
-			else echo "insert failed";
-		}
+		
+	
 		
 		
 		
 	
-		//待审核的界面
-		public function postcheck(){
-				$noau_sql="select * from project where state='checking'";
-				$postdata=$this->user->getalldata($noau_sql);
-				$pro_sql="select * from project where state='projchecking'";
-				$prodata=$this->user->getalldata($pro_sql);
-				$data['post_data']=$postdata;
-				$data['pro_data']=$prodata;
-				$this->show($data,'won-checkpost');
-				
-		}
 		
-		//待报名
-		public function signup(){
-			$sql="select * from project where state='checked'";
-			$signdata=$this->user->getalldata($sql);
-			$data['data']=$signdata;
-			$this->show($data,'won-signup');
-			
-		}
-		
-		
-		//一般看到的不同状态的项目显示
-		public function show_projectstate($p_id){
-			$u_id=$_SESSION['u_id'];
-			//$p_id=2;
-			$statesql="select state from project where p_id=".$p_id;
-			$statedata=$this->user->getalldata($statesql);
-			$state=$statedata[0]['state'];
-			//var_dump($state);
-			
-			$data=array();
-			//待审核中
-			if(strcasecmp($state,"checking")==0){
-				$this->show_project($p_id,$data,"projdetail-checking");
-			}				
-			//审核通过，开始报名
-			if(strcasecmp($state,"checked")==0){
-				$createdsql="select * from created_project a where a.p_id=".$p_id." and a.u_id=".$u_id;
-				$createdata=$this->user->getdata($createdsql);
-				$sql="select * from signup a,user b where a.p_id=".$p_id." and a.u_id=b.u_id";
-				$signdata=$this->user->getalldata($sql);
-				$data['signdata']=$signdata;
-				if(empty($createdata)){
-
-					$this->show_project($p_id,$data,"projdetail-signup");	
-				}
-				else{
-					$this->show_project($p_id,$data,"projdetail-checked");
-				}
-			}
-			//审核未通过
-			if(strcasecmp($state,"checkfailed")==0){			
-				$sql="select * from project where p_id=".$p_id;
-				$reasondata=$this->user->getalldata($sql);
-				$data['reasondata']=$reasondata;
-				$this->show_project($p_id,$data,"projdetail-checkfailed");			
-			}
-			//立项待审核中
-			if(strcasecmp($state,"projchecking")==0){
-				$this->show_project($p_id,$data,"proj-checking");
-			}
-			//立项审核未通过
-			if(strcasecmp($state,"projcheckfailed")==0){
-				$sql="select * from project where p_id=".$p_id;
-				$reasondata=$this->user->getalldata($sql);
-				$data['reasondata']=$reasondata;
-				$this->show_project($p_id,$data,"proj-checkfailed");
-			}
-			//立项审核通过
-			if(strcasecmp($state,"projchecked")==0){
-				$this->show_project($p_id,$data,"proj-checked");
-			}	
-				
-		}
-	
-		//管理员看到的不同状态的项目界面
-			public function administrator_show_projectstate($p_id){
-				$statesql="select state from project where p_id=".$p_id;
-				$statedata=$this->user->getalldata($statesql);
-				$state=$statedata[0]['state'];
-				$data=array();
-				//待审核的项目
-				if(strcasecmp($state,"checking")==0){
-					$this->show_project($p_id,$data,'projdetail-mgr');	
-				}
-				//立项待审核项目
-				if(strcasecmp($state,"projchecking")==0){
-					$this->show_project($p_id,$data,'checked-perfectproj');	
-					
-				}
-			
-		}
-		//管理员审核发布项目auditing：审核
-		public function checked($au,$sure,$p_id){
-			//sure=1:表示通过
-			//sure=0:表示没有通过
-			//au=1:项目申请通过
-			//au=2:立项申请通过
-			
-			$condition['p_id']=$p_id;
-			if(strcasecmp($sure,"ok")==0){
-				if(strcasecmp($au,"checked")){
-					//项目申请通过
-					$data['state']='checked';
-					$bool=$this->user->update('project',$data,$condition);
-					if($bool){
-						echo 1;
-					}
-					else{
-						echo 0;
-					}
-				}
-				else if(strcasecmp($au,"projchecked")==0){
-					//立项申请通过
-					$data['state']='projchecked';
-					$bool=$this->user->update('project',$data,$condition);
-					if($bool){
-						echo "1";
-						
-					}
-					else{
-						echo "0";
-					}
-				}
-			}
-			elseif(strcasecmp($sure,"no")==0){
-				$reason['reason']=$_POST['reason'];				
-				$bool=$this->user->update('project',$reason,$condition);
-					if($bool){
-						echo 1;
-						
-					}
-					else{
-						echo 0;
-					}
-				
-				
-				}
-		}
-		
-		//个人主页
-		public function personal_center(){
-			$u_id=$_SESSION['u_id'];
-			//创建项目
-			$createdsql="select * from created_project a,project b where u_id=".$u_id." and a.p_id=b.p_id";
-			$createdata=$this->user->getalldata($createdsql);
-			//参与项目
-			$takepartsql="select * from takepart_project a,project b where u_id=".$u_id." and a.p_id=b.p_id";
-			$takepartdata=$this->user->getalldata($takepartsql);
-			//立项请求
-			$data['createdata']=$createdata;
-			$data['takepartdata']=$takepartdata;
-			$this->show($data,'won-personal');
-
-		}
-		//项目进度
-		public function project_rate(){
-			//$page=0:这是第一个页面，刚开始项目进度的页面
-			//$page=1:这是第二个页面，显示三个部分的页面，项目内容，项目排期，团队信息
-			$u_id=$_SESSION['username'];
-			$ratesql="select * from created_project a,project b,user c where a.u_id=".$u_id." and a.p_id=b.p_id and a.u_id=c.u_id";
-			//echo $ratesql;
-			$ratedata=$this->user->getalldata($ratesql);
-			$data['data']=$ratedata;
-			$this->show($data,'won-projprogress');
-			
-		}
-		//显示上传排期的界面
-		public function show_schedule(){
-			$data=array();
-			$this->show($data,'postschedule');
-			
-		}
-		//负责人上传项目排期，同时修改项目的进度：rate
-		public function schdule($u_id,$rstate,$p_id){
-			//$state:该参数为访问时任务的状态以及管理员需要做什么
-			//$state=0:表示初始状态，$schdule['state']="未完成";
-			//$state=1：表示该任务的负责人已经完成，是负责人进入页面修改状态
-			//$state=2:表示负责人已经完成项目，但是未通过确认，管理员进行确认
-			
-			//$u_id=$_SESSION['u_id'];
-			//$u_id=$_POST['u_id'];
-			//$state=$_POST['state'];
-			if($rstate==0){
-				$schdule['p_id']=$_POST['p_id'];
-				$schdule['task']=$_POST['task'];
-				$schdule['finish_time']=$_POST['finish_time'];
-				//任务的初始化状态为为完成
-				$schdule['state']=0;
-				$schdule['work_by']=$_POST['work_by'];
-				$table='schdule';
-				$bool=$this->user->insert($table,$schdule);
-				if($boole){
-					echo "insert ok!";
-					
-				}
-				else echo "insert failed!";
-			}
-			else{
-				//$p_id=$_SESSION['p_id'];
-				//$condition['p_id']=$_POST['p_id'];
-				$condition['p_id']=$p_id;
-				$condition['u_id']=$u_id;
-				if($rstate==1){
-					$data['state']=1;
-					$table='schdule';
-					$bool=$this->user->update($table,$data,$condition);
-					if($bool){
-						echo "update ok!<br>";
-						
-					}
-					else echo "update failed!";
-				}
-				
-				if($rstate==2){
-					$data['state']=2;
-					$table='schdule';
-					$bool=$this->user->update($table,$data,$condition);
-					//echo $this->db->last_query();
-					if($bool){
-						echo "update state ok!<br>";
-						//确认已完成后，还需要修改项目的进度条，rate：完成task的个数/总的个数 ，的百分比
-						$alltask_sql="select count('task') from schdule where p_id=".$p_id;
-					//	echo "<br>";
-					//	echo $alltask_sql;
-						$finishtask_sql="select count('task') from schdule where p_id=".$p_id." and state=2";
-					//	echo $finishtask_sql;
-					//	echo "<br>";
-						$alldata=$this->user->getdata($alltask_sql);
-						$total=$alldata["count('task')"];
-					//	echo "total:".$total;
-					//	var_dump($total);
-						$finishdata=$this->user->getdata($finishtask_sql);
-						$finish=$finishdata["count('task')"];
-						
-						
-						
-					//	echo "finish:".$finish;
-						if($total!=0){
-							$rate['rate']=$finish/$total;
-						}
-						else $rate['rate']=0;
-						
-						$ratecondition['p_id']=$p_id;
-						
-						$bool=$this->user->update('project',$rate,$ratecondition);
-						if($bool){
-							echo "update rate ok<br>";
-							//var_dump($rate);
-							
-						}
-						else echo "update rate failed";
-						
-					}
-					else echo "update state failed!";
-				}	
-			}
-			
-			
-			
-		}
-		
-		
-	//报名参加
-		public function registration($u_id,$p_id){
-			
-				$sql="select max_member,have_member from project where p_id=".$p_id;
-				//echo $sql;
-				$mdata=$this->user->getdata($sql);
-				
-				echo $mdata['max_member'];
-				echo '<br>';
-				echo $mdata['have_member'];
-				var_dump((INT)$mdata['max_member']>(INT)$mdata['have_member']);
-				$mdata['max_member']=(INT)$mdata['max_member'];
-				$mdata['have_member']=(INT)$mdata['have_member'];
-				if($mdata['max_member']==$mdata['have_member']){
-					echo 0;
-				}
-				
-				elseif($mdata['max_member']>$mdata['have_member']){
-					//echo "<br>  iii";
-					
-					$mdata['have_member']=$mdata['have_member']+1;
-					$condition['p_id']=$p_id;
-					$bool=$this->user->update('project',$mdata,$condition);
-					$signupdata['u_id']=$u_id;
-					$signupdata['p_id']=$p_id;
-					$signupdata['state']='passing';
-					$insbool=$this->user->insert('signup',$signupdata);
-					if($bool && $insbool){
-						echo "1";
-						//$this->load->view();
-					}
-					else echo "0";
-				}
-				else{
-					echo 0;
-				}
-				
-				
-			
-		}
 		
 		
 	//项目开始和项目结束用时间戳来控制，到开始的时间后就直接将state设置为开始，结束后就直接设置为结束
@@ -465,7 +79,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
 
-	
+//以下非	
 		public function showusers(){
 			/*//装载数据库操作类
 			$this->load->database();

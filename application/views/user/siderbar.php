@@ -63,19 +63,19 @@
 									</a>
 									<ul class="submenu">
 										<li>
-											<a href="<?php echo base_url()."index.php/user/add_application/";?>">
+											<a href="<?php echo site_url();?>/project_application/add_application/">
 												申报项目
 											</a>
 										</li>
 
 										<li>
-											<a href="<?php echo base_url()."index.php/user/postcheck";?>" >
+											<a href="<?php echo site_url();?>/project_application/postcheck/" >
 												审核发布
 											</a>
 										</li>
 
 										<li>
-											<a href="<?php echo base_url()."index.php/user/signup";?>" >
+											<a href="<?php echo site_url();?>/project_application/signup/" >
 												报名参加
 											</a>
 										</li>
@@ -89,17 +89,17 @@
 									</a>
 									<ul class="submenu">
 										<li>
-											<a href="<?php echo base_url()."index.php/user/personal_center";?>">
+											<a href="<?php echo site_url()?>/Project_implement/personal_center">
 												个人主页
 											</a>
 										</li>
 										<li>
-											<a href="<?php echo base_url()."index.php/user/project_rate";?>" >
+											<a href="<?php echo site_url();?>/Project_implement/project_rate" >
 												项目进度
 											</a>
 										</li>
 									</ul>
-									<a href="#" >
+									<a href="<?php echo site_url();?>/All_projectshow/show_allproj" >
 										<i class="icon-double-angle-right"></i>
 										历届项目公示										
 									</a>
